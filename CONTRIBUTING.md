@@ -12,7 +12,7 @@ brief -> asset manifest -> contact sheet -> transcript pack -> EDL -> validate -
 ## Development
 
 ```bash
-python -m venv .venv
+python3.11 -m venv .venv
 .venv/bin/pip install -e .
 .venv/bin/python -m unittest discover -s tests
 ```

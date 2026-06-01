@@ -35,8 +35,10 @@ The design borrows from:
 
 ## Quick Start
 
+Requires Python 3.11 or newer.
+
 ```bash
-python -m venv .venv
+python3.11 -m venv .venv
 .venv/bin/pip install -e .
 
 ave init projects/my-edit
@@ -115,6 +117,9 @@ Install ASR support only when needed:
 ```bash
 .venv/bin/pip install -e '.[asr]'
 ```
+
+Without ASR support, `ave transcribe` writes a skipped report and the rest of
+the demo workflow still runs.
 
 ## Agent Skill
 

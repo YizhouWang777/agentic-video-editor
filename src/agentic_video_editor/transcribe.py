@@ -23,7 +23,8 @@ def transcribe_project(
 
     if importlib.util.find_spec("faster_whisper") is None:
         report = {
-            "passed": False,
+            "passed": True,
+            "skipped": True,
             "reason": "faster-whisper is not installed.",
             "install": "pip install 'agentic-video-editor[asr]'",
             "outputs": [],
@@ -79,7 +80,7 @@ def transcribe_project(
                 "skipped": False,
             }
         )
-    report = {"passed": True, "model": model_size, "outputs": outputs}
+    report = {"passed": True, "skipped": False, "model": model_size, "outputs": outputs}
     write_json(root / "analysis" / "transcribe_report.json", report)
     return report
 

@@ -36,7 +36,7 @@ def main() -> None:
     contact.add_argument("--frames", type=int, default=8)
     contact.add_argument("--thumb-width", type=int, default=320)
 
-    transcribe = sub.add_parser("transcribe", help="Transcribe source assets with faster-whisper when installed")
+    transcribe = sub.add_parser("transcribe", help="Transcribe source assets; skips cleanly when ASR is not installed")
     transcribe.add_argument("project", type=Path)
     transcribe.add_argument("--model", default="base")
     transcribe.add_argument("--language", default=None)
@@ -53,7 +53,7 @@ def main() -> None:
     validate = sub.add_parser("validate", help="Validate plan/edl.json before rendering")
     validate.add_argument("project", type=Path)
 
-    qa = sub.add_parser("qa", help="Run basic technical QA")
+    qa = sub.add_parser("qa", help="Run technical QA")
     qa.add_argument("project", type=Path)
     qa.add_argument("--video", type=Path, default=None)
 

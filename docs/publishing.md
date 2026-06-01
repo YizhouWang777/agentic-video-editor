@@ -21,8 +21,8 @@ git push origin v0.1.0
 ## Release Checklist
 
 ```bash
-python -m pip install -e .
-python -m unittest discover -s tests
+.venv/bin/python -m pip install -e .
+.venv/bin/python -m unittest discover -s tests
 ave demo /tmp/ave-smoke
 ave inspect /tmp/ave-smoke
 ave contact-sheet /tmp/ave-smoke --frames 2 --thumb-width 160
@@ -33,7 +33,7 @@ ave render /tmp/ave-smoke --preview
 ave qa /tmp/ave-smoke --video renders/preview.mp4
 ave render /tmp/ave-smoke
 ave qa /tmp/ave-smoke
-python -m pip wheel --no-deps -w /tmp/ave-wheel .
+.venv/bin/python -m pip wheel --no-deps -w /tmp/ave-wheel .
 ```
 
 ## Notes
