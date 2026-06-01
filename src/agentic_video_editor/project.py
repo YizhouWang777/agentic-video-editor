@@ -95,6 +95,7 @@ def default_edl() -> dict[str, Any]:
             "width": 1080,
             "height": 1920,
             "fps": 24,
+            "fit": "contain",
             "caption_style": "bold_safe",
         },
         "sources": {},

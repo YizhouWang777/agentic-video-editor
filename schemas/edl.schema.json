@@ -28,6 +28,10 @@
         },
         "caption_style": {
           "type": "string"
+        },
+        "fit": {
+          "type": "string",
+          "enum": ["contain", "cover"]
         }
       }
     },

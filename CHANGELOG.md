@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Added render `fit` mode with `contain` and `cover` options.
+- Validates render fit mode and documents crop-to-fill behavior.
+- Dogfooded with a real local HEVC/MOV source and vertical crop render.
+
 ## 0.1.0 - 2026-06-01
 
 Initial alpha release.

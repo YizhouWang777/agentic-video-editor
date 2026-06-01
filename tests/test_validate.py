@@ -124,6 +124,26 @@ class ValidateTests(unittest.TestCase):
         self.assertFalse(report["passed"])
         self.assertTrue(any(check["id"] == "segment_000_volume_valid" and not check["passed"] for check in report["checks"]))
 
+    def test_validate_rejects_invalid_render_fit(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            ensure_project(root)
+            write_json(
+                root / "plan" / "edl.json",
+                {
+                    "version": "0.1",
+                    "render": {"width": 1080, "height": 1920, "fps": 24, "fit": "stretch"},
+                    "segments": [],
+                    "captions": [],
+                    "overlays": [],
+                },
+            )
+
+            report = validate_project(root)
+
+        self.assertFalse(report["passed"])
+        self.assertTrue(any(check["id"] == "render_fit" and not check["passed"] for check in report["checks"]))
+
 
 if __name__ == "__main__":
     unittest.main()

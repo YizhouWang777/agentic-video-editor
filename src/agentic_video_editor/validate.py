@@ -153,8 +153,10 @@ def validate_project(root: Path) -> dict[str, Any]:
     width = _int(render.get("width"))
     height = _int(render.get("height"))
     fps = _int(render.get("fps"))
+    fit = str(render.get("fit") or "contain")
     add("render_dimensions", width > 0 and height > 0, "Render width and height must be positive.", width=width, height=height)
     add("render_fps", fps > 0, "Render fps must be positive.", fps=fps)
+    add("render_fit", fit in {"contain", "cover"}, "Render fit must be `contain` or `cover`.", fit=fit)
 
     return _write_report(root, checks, total_duration=total_duration)
 

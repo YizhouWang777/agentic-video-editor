@@ -27,13 +27,14 @@ def render_project(root: Path, *, preview: bool = False) -> Path:
     width = int(render_cfg.get("width") or 1080)
     height = int(render_cfg.get("height") or 1920)
     fps = int(render_cfg.get("fps") or 24)
+    fit = str(render_cfg.get("fit") or "contain")
     out_path = root / "renders" / ("preview.mp4" if preview else "final.mp4")
     work_dir = root / "work" / ("preview_clips" if preview else "clips")
     work_dir.mkdir(parents=True, exist_ok=True)
 
     segment_paths = []
     for index, segment in enumerate(edl.get("segments", [])):
-        segment_paths.append(_extract_segment(root, segment, index, work_dir, width, height, fps, preview=preview))
+        segment_paths.append(_extract_segment(root, segment, index, work_dir, width, height, fps, fit, preview=preview))
     if not segment_paths:
         raise ValueError("EDL has no segments. Add segments to plan/edl.json before rendering.")
 
@@ -51,7 +52,7 @@ def render_project(root: Path, *, preview: bool = False) -> Path:
             "output": str(out_path.relative_to(root)),
             "segments": [str(p.relative_to(root)) for p in segment_paths],
             "preview": preview,
-            "render": {"width": width, "height": height, "fps": fps},
+            "render": {"width": width, "height": height, "fps": fps, "fit": fit},
         },
     )
     return out_path
@@ -65,6 +66,7 @@ def _extract_segment(
     width: int,
     height: int,
     fps: int,
+    fit: str,
     *,
     preview: bool,
 ) -> Path:
@@ -78,7 +80,10 @@ def _extract_segment(
     out = work_dir / f"seg_{index:03d}.mp4"
     metadata = probe(source)
     volume = float(segment.get("volume", 1.0))
-    vf = f"scale={width}:{height}:force_original_aspect_ratio=decrease,pad={width}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1"
+    if fit == "cover":
+        vf = f"scale={width}:{height}:force_original_aspect_ratio=increase,crop={width}:{height},setsar=1"
+    else:
+        vf = f"scale={width}:{height}:force_original_aspect_ratio=decrease,pad={width}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1"
     preset = "ultrafast" if preview else "fast"
     crf = "28" if preview else "20"
     cmd = [

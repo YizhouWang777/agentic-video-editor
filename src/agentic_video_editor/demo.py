@@ -30,7 +30,7 @@ def create_demo(root: Path) -> None:
         root / "plan" / "edl.json",
         {
             "version": "0.1",
-            "render": {"width": W, "height": H, "fps": FPS, "caption_style": "bold_safe"},
+            "render": {"width": W, "height": H, "fps": FPS, "fit": "contain", "caption_style": "bold_safe"},
             "sources": {Path(name).stem: f"assets/source/{name}" for name, *_ in specs},
             "segments": [
                 {"source": f"assets/source/{name}", "start": 0, "end": duration, "beat": title}

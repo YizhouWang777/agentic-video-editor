@@ -11,6 +11,7 @@ The EDL is stored at `plan/edl.json`.
     "width": 1080,
     "height": 1920,
     "fps": 24,
+    "fit": "contain",
     "caption_style": "bold_safe"
   },
   "sources": {
@@ -44,6 +45,7 @@ The EDL is stored at `plan/edl.json`.
 - Segment `start` and `end` are source-local seconds.
 - Segment `volume` is optional and must be between 0.0 and 4.0.
 - Caption `start` and `end` are final-timeline seconds.
+- Render `fit` is `contain` for letterboxing or `cover` for crop-to-fill.
 - Subtitles are applied after the base edit is rendered.
 - If word-level transcripts exist, cuts must not land inside a word.
 - Every rendered segment is normalized to h264 video plus AAC audio. Silent
