@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/agentic-video-editor/validation-report.schema.json",
+  "title": "Agentic Video Editor Validation Report",
+  "type": "object",
+  "required": ["passed", "total_duration", "checks"],
+  "additionalProperties": true,
+  "properties": {
+    "passed": {
+      "type": "boolean"
+    },
+    "total_duration": {
+      "type": "number"
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "passed", "detail"],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "detail": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

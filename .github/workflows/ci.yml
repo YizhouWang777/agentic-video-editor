@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Run tests
+        run: python -m unittest discover -s tests
+
+      - name: Smoke demo
+        run: |
+          ave demo examples/demo-project
+          ave inspect examples/demo-project
+          ave contact-sheet examples/demo-project --frames 2 --thumb-width 160
+          ave transcribe examples/demo-project
+          ave pack-transcripts examples/demo-project
+          ave validate examples/demo-project
+          ave render examples/demo-project --preview
+          ave qa examples/demo-project --video renders/preview.mp4
+          ave render examples/demo-project
+          ave qa examples/demo-project

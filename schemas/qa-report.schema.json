@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/agentic-video-editor/qa-report.schema.json",
+  "title": "Agentic Video Editor QA Report",
+  "type": "object",
+  "required": ["file", "metadata", "checks", "passed"],
+  "additionalProperties": true,
+  "properties": {
+    "file": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["duration", "width", "height", "fps", "size_bytes"],
+      "additionalProperties": true,
+      "properties": {
+        "duration": {
+          "type": "number"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "fps": {
+          "type": "number"
+        },
+        "has_audio": {
+          "type": "boolean"
+        },
+        "size_bytes": {
+          "type": "integer"
+        }
+      }
+    },
+    "sampled_frames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sampled_frame_means": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "black_frames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "expected_audio": {
+      "type": ["boolean", "null"]
+    },
+    "expected_duration": {
+      "type": ["number", "null"]
+    },
+    "audio_stats": {
+      "type": ["object", "null"],
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "probe_error": {
+      "type": ["string", "null"]
+    },
+    "sample_errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "passed": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+
+# Agentic Video Editor generated project artifacts
+examples/demo-project/
+**/assets/source/*
+**/assets/generated/*
+**/analysis/asset_manifest.json
+**/analysis/contact_sheet_report.json
+**/analysis/contact_sheets/
+**/analysis/frame_notes.md
+**/analysis/keyframes/
+**/analysis/takes_packed.md
+**/analysis/timeline_view.md
+**/analysis/transcribe_report.json
+**/analysis/transcripts/*.json
+**/plan/validation_report.json
+**/renders/
+**/work/
+
+# Keep placeholder files when present
+!**/.gitkeep
